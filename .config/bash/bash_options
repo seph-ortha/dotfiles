@@ -1,0 +1,13 @@
+#!/bin/bash
+
+######### Shopt Options
+shopt -s autocd ## Auto cd
+###
+######### Set Options
+set bell-style audible
+set blink-matching-paren on
+set colored-completion-prefix on
+set colored-stats on
+set editing-mode vi
+set enable-keypad on
+###

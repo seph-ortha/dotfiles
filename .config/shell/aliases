@@ -1,0 +1,48 @@
+######### • Aliases
+##        _          _ _         _ _                     
+##    ___| |__   ___| | |   __ _| (_) __ _ ___  ___  ___ 
+##   / __| '_ \ / _ \ | |  / _` | | |/ _` / __|/ _ \/ __|
+##   \__ \ | | |  __/ | | | (_| | | | (_| \__ \  __/\__ \
+##   |___/_| |_|\___|_|_|  \__,_|_|_|\__,_|___/\___||___/
+##
+### -----------------------------------------------------
+
+######### • Info
+alias \
+        bookmarks="cat $XDG_CONFIG_HOME/web/bookmarks" \
+        fontbook="ls $FONT_DIR_HOME | less" \
+        figlet-fonts="ls /usr/local/Cellar/figlet/2.2.5/share/figlet/fonts | less"
+###
+######### • Navigation
+alias \
+        ..="cd .." \
+        bash_dir="$HOME/bashy" \
+        bash-learn="$HOME/bashy/learn" \
+        bash-scrpits="$HOME/bashy/scripts" \
+        bash-course="$HOME/bashy/bash_course" \
+        font_dir="$HOME/Library/Fonts" \
+        web_dir="$HOME/.config/web"
+###
+######### • Programs
+alias \
+        mpd="mpd ~/.config/mpd/mpd.conf" \
+        muson="mpd && ncmpcpp" \
+        musoff="killall ncmpcpp && killall mpd" \
+        vim="vim -u $XDG_CONFIG_HOME/vim/.vimrc" \
+######### • Utility
+alias \
+        ka="killall" \
+        grep="grep --color=auto" \
+        zenv="$HOME/bashy/learn/zenv.sh" \
+        show-hidden-files='$(defaults write com.apple.Finder AppleShowAllFiles true && killall Finder)' \
+        hide-hidden-files='$(defaults write com.apple.Finder AppleShowAllFiles false && killall Finder)' \
+        config='/usr/bin/git --git-dir=$HOME/dotfiles/ --work-tree=$HOME' 
+###
+######### • Dot Files
+alias \
+        zrc="$EDITOR $HOME/.zshrc" \
+        src-bash=". ${XDG_CONFIG_HOME}/bash/.bashrc"
+
+alias irssi="irssi --config="$XDG_CONFIG_HOME"/irssi/config --home="$XDG_DATA_HOME"/irssi"
+###
+### -----------------------------------------------------

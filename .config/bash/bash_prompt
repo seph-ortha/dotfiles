@@ -1,0 +1,10 @@
+#!/bin/bash
+
+bash_prompt_1() {
+    new_line=$'\n' ## Variable for a new line.
+    bash_prompt_br1="$(tput setaf 141; printf "%$(tput cols)s" " " | tr " " "-"; tput sgr0)"
+    bash_prompt_title_text="$USER's  BASH  v$BASH_VERSION : $SHELL"
+    bash_prompt_title="$(printf "%*s" $(((COLUMNS+${#bash_prompt_title_text})/2)) "${bash_prompt_title_text}")"
+    PS1="${new_line}${bash_prompt_br1}${bash_prompt_title}${new_line}: \h {\w}${new_line}${new_line} ⚘ "
+}
+bash_prompt_1
