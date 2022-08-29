@@ -1,0 +1,264 @@
+##############################################################
+## Seph Ortha's NCMPCPP Configuration File. Copy it to      ##
+## $XDG_CONFIG_HOME/ncmpcpp/config or $HOME/.ncmpcpp/config ##
+## and set up your preferences.                             ##
+##############################################################
+
+#					Song Format
+
+#			%l - length
+#			%f - filename
+#			%D - directory
+#			%a - artist
+#			%A - album artist
+#			%t - title
+#			%b - album
+#			%y - date
+#			%n - track number (01/12 -> 01)
+#			%N - full track info (01/12 -> 01/12)
+#			%g - genre
+#			%c - composer
+#			%p - performer
+#			%d - disc
+#			%C - comment
+#			%P - priority
+#			$R - begin right alignment
+
+#——————————————————————————————————————
+
+#					Directories
+
+mpd_music_dir = "/volumes/audio/rec/audio·decalib"
+
+ncmpcpp_directory = "$XDG_CONFIG_HOME/ncmpcpp"
+
+lyrics_directory = "$XDG_CONFIG_HOME/ncmpcpp/lyrics"
+
+#——————————————————————————————————————
+
+#					Connection
+
+mpd_host = "localhost"
+
+mpd_port = "6600"
+
+#mpd_password = ""
+
+mpd_connection_timeout = "5"
+
+mpd_crossfade_time = "5"
+
+# Exclude pattern for random song action
+# http://www.boost.org/doc/libs/1_46_1/libs/regex/doc/html/boost_regex/syntax/perl_syntax.html
+#random_exclude_pattern = "^(temp|midi_songs).*"
+
+#——————————————————————————————————————
+
+#					System Encoding
+
+# MPD uses utf-8 by default
+system_encoding = "utf-8"
+
+#——————————————————————————————————————
+
+startup_screen = playlist
+
+screen_switcher_mode = "playlist, media_library, browser"
+
+default_tag_editor_pattern = "%a-%y-%b-%n-%t"
+
+default_place_to_search_in = "database"
+
+#         Screen 4
+#					Other ##
+regular_expressions = "extended"
+clock_display_seconds = "yes"
+autocenter_mode = "yes"
+centered_cursor = "yes"
+
+# Misc
+follow_now_playing_lyrics = "yes"
+
+        # Selection
+discard_colors_if_item_is_selected = "yes"
+selected_item_prefix = "♥ "
+
+        # Display Modes
+
+search_engine_display_mode = "columns"
+
+        # Current Item
+current_item_prefix = "$(85)$r┣▶ "
+current_item_suffix = "$/r$(end)"
+current_item_inactive_column_prefix = "$(102)$r┣▶ "
+current-item_inactive_column_suffix = "$/r$9end)"
+
+        # Visibility
+titles_visibility = "yes"
+
+        # Now Playing
+jump_to_now_playing_song_at_start = "yes"
+now_playing_prefix = "$(85)┣ ♬ "
+now_playing_suffix = "$(85) ┫"
+
+#——————————————————————————————————————
+
+#         Screen 1
+#                   Playlist
+
+# Main Settings
+
+playlist_show_mpd_host = "yes"
+
+## Time of inactivity (in seconds) after playlist highlighting will be disabled
+## (0 = always on).
+playlist_disable_highlight_delay = "2"
+playlist_show_remaining_time = "yes"
+playlist_shorten_total_times = "no"
+playlist_separate_albums = "yes"
+
+main_window_color = "blue"
+#active_window_color = "red"
+window_border_color = "magenta"
+
+
+        # Header
+header_visibility = "yes"
+header_window_color = "112"
+header_text_scrolling = "yes"
+
+        # Status Bar
+statusbar_visibility = "yes"
+statusbar_color = "85"
+display_bitrate = "yes"
+display_volume_level = "yes"
+volume_color = "85"
+volume_change_step = "9"
+player_state_color = "green"
+message_delay_time = "2"
+
+        # Progress Bar
+progressbar_look = "━◉╌"
+progressbar_color = "blue"
+progressbar_elapsed_color = "85"
+# Seeking
+incremental_seeking = "yes"
+seek_time = "1"
+
+        # Interface
+# Classic
+#user_interface = classic
+song_status_format = "$3♬$9 $4%y$9 $5•$9 $3%a$9 $5•$9 $3%b$9 $5•$9 $3%n$9 $5•$9 $3%t$9 "
+#song_status_format = "$b{{$8"%t"}} $3by {$4%a{ $3in $7%b{ (%y)}} $3}|{$8%f}"
+# Alternativee
+user_interface = alternative
+alternative_ui_separator_color = 6
+alternative_header_first_line_format = "{$(188)☽ %y ☼$9} {$(63)━━┫$9}{$(122_1) %a $9}{$(188_1)☉$9}{$(122_1) "%t" $9}|{$(5)%f$9}{$(63)┣━━$9} {$(188)☼ %y ☾$9}"
+alternative_header_second_line_format = "{ {$(63)━━┫$9}{$(116_1) %A $9}{$(104_1) album $9}{$(116_1) "%b" $9}{$(104_1) # $9$(116_1)%N$9}{$(104_1) %g $9}{$(63)┣━━$9} }|{$104%D}"
+
+
+        # Playlist Editor
+# Classic Mode
+playlist_display_mode = "classic"
+song_list_format = "{$5┃$9} {$(102)%y$9} {$(40)%a $9}{$(34)"%b" $9}{$(40)%n $9}{$(46)"%t"$9}|{$5%f$9} $R {$(61)%g $9} {$7(%l)$9} {$5┃$9}"
+# Columns Mode
+#playlist_display_mode = "columns"
+#song_columns_list_format = "(3)[102]{y} (20)[blue]{a} (25)[cyan]{b} (5)[blue]{n} (20)[cyan]{t} (25)[blue]{g} (2)[magenta]$R{l}"
+song_columns_list_format = {(5f)[102]{y:Year}} {(20)[40]{a:Artist}} {(20)[34]{b:Album}} {(3f)[40]{NrE:#}} {(20)[46]{t|f:Title} {(20)[104]{gr:Genre}} {(5f)[40]{lr:Time}|}
+
+
+ignore_leading_the = yes
+external_editor = vim
+use_console_editor = yes
+
+cyclic_scrolling = "no"
+lines_scrolled = "2"
+
+#——————————————————————————————————————
+
+#         Screen 2
+#                   Browser
+
+browser_display_mode = "classic"
+
+browser_playlist_prefix = "$3playlist • $9"
+
+browser_sort_mode = "format"
+
+browser_sort_format = "{%a}{%n}{%b}{%t}"
+
+
+#——————————————————————————————————————
+
+#					Screen 4
+#										Media Library
+
+
+song_library_format = "{$(63) %n $9$(39) %t $9}|{$5 %f $9}"
+
+media_library_primary_tag = "artist"
+
+media_library_albums_split_by_date = "yes"
+
+media_library_hide_album_dates = "no"
+
+media_library_sort_by_mtime = "no"
+
+#media_library_column_width_ratio_two = 1:1
+
+#media_library_column_width_ratio_three = 1:1:1
+
+#————————————————————————————————————
+
+colors_enabled = "yes"
+empty_tag_color = "red"
+state_line_color = "cyan"
+state_flags_color = "blue"
+color1 = "cyan"
+color2 = "70"
+
+#——————————————————————————————————————
+
+#         Screen 8
+
+#                   Visualiser
+
+visualizer_data_source = "/tmp/mpd.fifo"
+
+# Output name in MPD config
+visualizer_output_name = "my_fifo"
+
+## If you set format to 44100:16:2, make it 'yes'.
+visualizer_in_stereo = "yes"
+
+#visualizer_sync_interval = "12"
+## Available values: spectrum, wave, wave_filled, ellipse.
+
+visualizer_type = "spectrum"
+
+visualizer_fps = "60"
+
+visualizer_autoscale = "yes"
+
+visualizer_look = "◉█"
+
+visualizer_color = "18, 27, 36, 45, 54, 63, 72, 81, 90, 99"
+
+# Spectrum Visualizer Only
+#   To enable spectrum visualization
+#   compile ncmpcpp with fftw3 support.
+
+visualizer_spectrum_smooth_look = "yes"
+
+visualizer_spectrum_dft_size = "3"
+
+visualizer_spectrum_gain = "18"
+
+# Set next two settings to
+# human hearing 20 hz - 20,000 hz
+
+visualizer_spectrum_hz_min = "20"
+
+visualizer_spectrum_hz_max = "20000"
+
+#——————————————————————————————————————

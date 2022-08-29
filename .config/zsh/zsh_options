@@ -1,0 +1,29 @@
+## ---------• Options
+### • AUTO_CD (-J)
+## Automatically cd into typed directory.
+### • INTERACTIVE_COMMENTS (-k)
+## Allow comments even in interactive shells.
+### • PROMPT_SUBST
+## Parameter & Arithmetic Expansion & Command Substitution.
+### • PROMPT_PERCENT
+## Certain escape sequences that start with % are expanded.
+### • EXTENDED GLOB
+## Treat the '#' '~' and '^' as part of patterns for filename generation, etc.
+### • NOMATCH (+3)
+## If a pattern for filename generation has no matches, print an error, instead
+## of leaving it unchanged in the argument list. This also applies to file
+## expansion of an initial '~' or '='
+### • MENU_COMPLETE (-Y)
+## On ambibuous completion, instead of listing possibilities or beeping, insert
+## the first match immediately. Then when completion is requested again, remove
+## the first match and insert the second match, etc. When there are no more matches
+## go back to the first one again. reverse-menu-complete may be used to loop through
+## the list in the other direction. This option overrides AUTO_MENU.
+setopt  AUTO_CD \
+        INTERACTIVE_COMMENTS \
+        PROMPT_SUBST \
+        PROMPT_PERCENT \
+        EXTENDED_GLOB \
+        NOMATCH \
+        MENU_COMPLETE \
+        BEEP

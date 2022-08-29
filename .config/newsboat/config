@@ -1,0 +1,64 @@
+##############################################################
+##																												  ##
+##	      Seph Ortha's .newsboat/config file.							  ##
+##																												  ##
+##############################################################
+#---------Basic Settings
+auto-reload "no"
+reload-time "27" # Reloads feeds every 27 mins
+reload-threads "100"
+max-items "0" # Keeps all downloaded articles
+history-limit "100" # Saves 100 searches to log file
+show-read-feeds "yes"
+external-url-viewer "urlview"
+always-display-description "yes"
+browser "brave"
+#---------Colors
+color background color75 black
+color listnormal color111 black
+color listfocus color49 black
+color listnormal_unread color69 black
+color listfocus_unread color122 black
+color title color87 color57 bold
+color info color85 color55
+color hint-key color79 color55 bold
+color hint-keys-delimiter color73 color55
+color hint-separator color73 color55 bold
+color hint-description color73 color55
+color article color81 black
+#end-of-text-marker default default
+#---------Highlighting
+highlight article "(^Feed:.*|^Title:.*|^Author:.*)" cyan default bold
+highlight article "(^Link:.*|^Date:.*)" default default
+highlight article "https?://[^ ]+" green default
+highlight article "^(Title):.*$" blue default
+highlight article "\\[[0-9][0-9]*\\]" magenta default bold
+highlight article "\\[image\\ [0-9]+\\]" color122 default bold
+highlight article "\\[embedded flash: [0-9][0-9]*\\]" green default bold
+highlight article ":.*\\(link\\)$" cyan default
+highlight article ":.*\\(image\\)$" blue default
+highlight article ":.*\\(embedded flash\\)$" magenta default
+highlight feedlist "---.*---" color229 color200 bold
+highlight feedlist ".*0/0.." color201 color201
+highlight feedlist " N " color37 default
+always-display-description "yes"
+#---------Bindings
+unbind-key j
+unbind-key k
+unbind-key h
+unbind-key H
+unbind-key L
+unbind-key c
+# bind keys
+bind-key ; macro-prefix
+bind-key h quit
+bind-key BACKSPACE quit
+bind-key j down
+bind-key k up
+bind-key l open
+bind-key H prev-feed
+bind-key L next-feed
+bind-key c toggle-show-read-feeds
+bind-key U show-urls
+#---------Macros
+macro w set browser "mpv %u" ; open-in-browser ; set browser "brave %u"
