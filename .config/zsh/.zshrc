@@ -17,9 +17,9 @@
 [ -f "$XDG_CONFIG_HOME/shell/assets" ] && source "$XDG_CONFIG_HOME/shell/assets" && zshell_assets="shell_assets"
 ###
 ######### Source: Zsh files
-zsh_add_file "zsh-options"
+zsh_add_file "zsh_options"
 # zsh_add_file "zsh-vim-mode"
-zsh_add_file "zsh-prompt"
+zsh_add_file "zsh_prompt"
 ###
 ######### Tab Completion
 autoload -U compinit
@@ -29,7 +29,7 @@ compinit
 _comp_options+=(globdots)
 ###
 ######### Enable colors
-autoload -U colors && colors	# Load colors
+autoload -U colors && colors
 stty stop undef		# Disable ctrl-s to freeze terminal.
 ###
 ######### History in cache directory:
@@ -64,4 +64,4 @@ terminal-notifier \
     -contentImage ~/.config/zsh/zsh_wizard.png
 ######### Ring Bell    
 echo -e "\a"
-#######
+#########

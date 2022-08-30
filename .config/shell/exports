@@ -1,6 +1,4 @@
-#!/bin/sh
-
-######### • Shell Exports
+######### • Seph's Shell Exports
 ##        _          _ _                              _       
 ##    ___| |__   ___| | |   _____  ___ __   ___  _ __| |_ ___ 
 ##   / __| '_ \ / _ \ | |  / _ \ \/ / '_ \ / _ \| '__| __/ __|
@@ -65,11 +63,7 @@ export RUSTUP_HOME="$XDG_DATA_HOME"/rustup
 ###
 ######### Zsh
 ## • Apple resets
-## The following are used by Apple in /etc/zshrc, which
-## is sourced _before_ `.zshrc`
-## Wouldn't have to go in .zprofile otherwise.
-## We could put them in .zshenv, but that file is best 
-## kept as small as possible.
+## Used by Apple in /etc/zshrc which zsh sources before .zshrc
 export SHELL_SESSION_DIR="$XDG_STATE_HOME/zsh/sessions"
 export SHELL_SESSION_FILE="$SHELL_SESSION_DIR/$TERM_SESSION_ID"
 ###
