@@ -32,7 +32,7 @@ function zsh_login_title() {
 function zsh_title() {
     tput setaf 81; figlet -w $COLUMNS -c Z-Shell; tput sgr0
 }
-function zsh_login_title() {
+function zsh_login_title2() {
     tput clear
     yellow222="$(tput setaf 222)"
     green84="$(tput setaf 84)"
