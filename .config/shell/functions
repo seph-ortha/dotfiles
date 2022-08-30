@@ -1,0 +1,104 @@
+#!/bin/bash
+
+######### • Shell Functions
+##        _          _ _    __                  _   _                 
+##    ___| |__   ___| | |  / _|_   _ _ __   ___| |_(_) ___  _ __  ___ 
+##   / __| '_ \ / _ \ | | | |_| | | | '_ \ / __| __| |/ _ \| '_ \/ __|
+##   \__ \ | | |  __/ | | |  _| |_| | | | | (__| |_| | (_) | | | \__ \
+##   |___/_| |_|\___|_|_| |_|  \__,_|_| |_|\___|\__|_|\___/|_| |_|___/
+##
+### -------------------------------------------------------------------
+
+######### --------- • Functions
+###
+###### ------ • Utility
+## Add a directory to PATH
+pathadd() {
+    if [ -d "$1" ] && [[ ":$PATH:" != *":$1:"* ]]; then
+        PATH="${PATH:+"$PATH:"}$1"
+    fi
+}
+checkShell() {
+    case "$-" in 
+        *i*) echo This shell is interactive;;
+        *) echo This shell is not interactive;;
+    esac
+}
+bash_login_title() {
+    tput setaf 85; figlet -w $COLUMNS -c Bourne-Again Shell; tput sgr0
+}
+bash_title() {
+    tput setaf 141; printf "%$(tput cols)s\n\n" " " | tr " " "-"; tput sgr0
+    tput setaf 85; figlet -w $COLUMNS -c -f chunky Bash; tput sgr0
+}
+function add_zsh_file() {
+    [ -f "$ZDOTDIR/$1" ] && source "$ZDOTDIR/$1"
+}
+###
+######### --- Shell Functions
+function shell_add_file() {
+    [ -f "$XDG_CONFIG_HOME/shell/$1" ] && source "$XDG_CONFIG_HOME/shell/$1"
+}
+function bash_refresh() { 
+    tput clear ; source "$HOME/.bashrc"
+} 
+
+###
+############ --- Utility
+lfcd() {
+    tmp="$(mktmp)"
+    lf -last-dir-path="$tmp" "$@"
+    if [ -f "$tmp" ]; then
+        dir="$(cat "$tmp")"
+        rm -f "$tmp"
+        [ -d "$dir" ] && [ "$dir" != "$(pwd)" ] && cd "$dir"
+    fi
+}
+edit_text() {
+    vim ## --- • Edit Text
+}
+write_script() {
+    learn-bash ## --- • Write Script
+}
+music_daemon() {
+    mpd ## --- • Music Daemon
+}
+music_client() {
+    ncmpcpp ## --- • Music Client
+}
+decalib() {
+    decalib·generator ## --- • Decalib
+}
+###
+######### --- Design Utility
+centerLine() {
+    for i in $1; do
+        printf "%*s\n" $(((COLUMNS+${#1})/2)) "$1"
+    done
+}
+divLine() {
+    for i in $1; do
+        printf "%$(tput cols)s\n" " " | tr " " "$1"
+    done
+}
+function tputColors() {
+    tput clear
+    tput bold
+    tput setaf 86
+    tput cup 2 24
+        echo -e "There are 256 terminal colors.\n\n"
+    tput cup 3 24
+        echo -e "tput setaf #; tput sgr0 resets\n\n"
+    tput sgr0
+    # Loop colors in a row:
+    for i in $(seq 1 256); do
+        tput setaf "$i"
+        echo -e "██\c"
+    done; echo
+    for i in $(seq 1 256); do
+        tput setaf "$i"
+        echo -e "█$i \c"
+    done; echo
+}
+###
+### -------------------------------------------------------------------

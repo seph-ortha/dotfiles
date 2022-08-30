@@ -17,9 +17,9 @@
 [ -f "$XDG_CONFIG_HOME/shell/assets" ] && source "$XDG_CONFIG_HOME/shell/assets" && zshell_assets="shell_assets"
 ###
 ######### Source: Zsh files
-zsh_add_file "zsh_options"
-# zsh_add_file "zsh-vim-mode"
-zsh_add_file "zsh_prompt"
+add_zsh_file "zsh_options"
+add_zsh_file "zsh_prompt"
+add_zsh_file "zsh_functions"
 ###
 ######### Tab Completion
 autoload -U compinit

@@ -1,0 +1,65 @@
+#!/bin/zsh
+
+######### --- Seph's Zsh Functions
+##   
+##            _          __                  _   _
+##    _______| |__      / _|_   _ _ __   ___| |_(_) ___  _ __  ___
+##   |_  / __| '_ \    | |_| | | | '_ \ / __| __| |/ _ \| '_ \/ __|
+##    / /\__ \ | | |   |  _| |_| | | | | (__| |_| | (_) | | | \__ \
+##   /___|___/_| |_|___|_|  \__,_|_| |_|\___|\__|_|\___/|_| |_|___/
+##                |_____|
+##   
+##   
+###
+
+######### --- Utility
+function zsh_refresh() { tput clear ; source "$XDG_CONFIG_HOME/zsh/.zshrc"; }
+function zsh_add_plugin() {
+    PLUGIN_NAME=$(echo $1 | cut -d "/" -f 2)
+    if [ -d "$ZDOTDIR/plugins/$PLUGIN_NAME" ]; then 
+        # For plugins
+        zsh_add_file "plugins/$PLUGIN_NAME/$PLUGIN_NAME.plugin.zsh" || \
+        zsh_add_file "plugins/$PLUGIN_NAME/$PLUGIN_NAME.zsh"
+    else
+        git clone "https://github.com/$1.git" "$ZDOTDIR/plugins/$PLUGIN_NAME"
+    fi
+}
+###
+######### Titles
+function zsh_login_title() {
+    tput setaf 81; figlet -w $COLUMNS -c Z-Shell; tput sgr0
+}
+function zsh_title() {
+    tput setaf 81; figlet -w $COLUMNS -c Z-Shell; tput sgr0
+}
+function zsh_login_title() {
+    tput clear
+    yellow222="$(tput setaf 222)"
+    green84="$(tput setaf 84)"
+    gold137="$(tput setaf 137)"
+    reset="$(tput sgr0)"
+    tput setaf 39; printf "%$(tput cols)s\n" " " | tr " " "-"; tput sgr0
+    tput setaf 179
+    centerLine "Symbolic Integrity · Living-Meaning · Nostalgia"
+    tput sgr0
+    printf "\n"
+    tput setaf 105; figlet -w $COLUMNS -c -f small Welcome to; tput sgr0
+    tput setaf 81; figlet -w $COLUMNS -c -f doom Culture Altar; tput sgr0
+    tput setaf 27; figlet -w $COLUMNS -c -f ogre Z-shell; tput sgr0
+    login_options_a_text=" Files ^o Editor ^p Script ^[ "
+    login_options_a_color=" ${yellow222}Files${reset} ${green84}^o${reset} ${yellow222}Editor${reset} ${green84}^p${reset} ${yellow222}Script${reset} ${green84}^[${reset} "
+    login_options_a_sum="$(((${#login_options_a_color}-${#login_options_a_text})))"
+    login_options_b_text=" Music-Daemon ^] Music-Client ^\ "
+    login_options_b_color=" ${yellow222}Music-Daemon${reset} ${green84}^] ${yellow222}Music-Client${reset} ${green84}^\ "
+    login_options_b_sum="$(((${#login_options_b_color}-${#login_options_b_text})))"
+    printf "\n%*s\n" $(((COLUMNS+${#login_options_a_color}+login_options_a_sum)/2)) "$login_options_a_color"
+    printf "%*s\n\n" $(((COLUMNS+${#login_options_b_color}+login_options_b_sum)/2)) "$login_options_b_color"
+    login_options_info_bottom_right="Enter:  shell-intro   to show this titlescreen."
+    tput setaf 72
+    printf "%*s\n" $(((COLUMNS+${#login_options_info_bottom_right})/2)) "$login_options_info_bottom_right"
+    tput sgr0
+    tput setaf 39
+    printf "%$(tput cols)s\n" " " | tr " " "-"
+    tput sgr0
+}
+###
