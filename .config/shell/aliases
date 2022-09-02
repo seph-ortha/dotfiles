@@ -37,7 +37,7 @@ alias \
         grep="grep --color=auto" \
         show_files='$(defaults write com.apple.Finder AppleShowAllFiles true && killall Finder)' \
         hide_files='$(defaults write com.apple.Finder AppleShowAllFiles false && killall Finder)' \
-        config='/usr/bin/git --git-dir=$HOME/dotfiles/ --work-tree=$HOME' 
+        config='/usr/bin/git --git-dir=$HOME/dev/repos/dotfiles/ --work-tree=$HOME' 
 ###
 ######### • Dot Files
 alias \
@@ -45,4 +45,8 @@ alias \
         src-bash=". $XDG_CONFIG_HOME/bash/.bashrc" \
         src-zsh=". $XDG_CONFIG_HOME/zsh/.zshrc"
 ###
+
+#--------- Git
+alias \
+        gpush-config="config push https://github.com/sephortha/dotfiles.git"
 ### -----------------------------------------------------

@@ -9,7 +9,7 @@
 ## $XDG_CONFIG_HOME/ncmpcpp/config or $HOME/.ncmpcpp/config ##
 ## and set up your preferences.                             ##
 ##############################################################
-##
+###
 #					Song Format
 #
 #			%l - length

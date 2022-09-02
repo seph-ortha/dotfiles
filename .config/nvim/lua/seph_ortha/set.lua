@@ -1,5 +1,7 @@
 vim.opt.guicursor = ""
 
+vim.opt.viminfofile = "$XDG_CONFIG_HOME/nvim/viminfo"
+
 vim.opt.nu = true
 vim.opt.tabstop = 4
 vim.opt.shiftwidth = 4

@@ -1,7 +1,7 @@
 #!/bin/zsh
 
 # PS1="%B%{$fg[purple]%}[%{$fg[cyan]%}%n%{$fg[green]%}@%{$fg[blue]%}%M %{$fg[magenta]%}%~%{$fg[purple]%}]%{$reset_color%} ⚘%b "
-zPrompt() {
+
 ## --------- • Prompt
 ## Prompt sequences undergo a special form of expansion.
 ## This type of expansion is also available using the
@@ -45,5 +45,3 @@ RPROMPT="%F{223}%*%f %F{243}[%?]%f"
 
 ## PS2? for zsh
 PS2="⚘ "
-}
-zPrompt
