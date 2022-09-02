@@ -18,6 +18,15 @@ function test_src_files() {
     confirmed_files="${confirm_aliases} · ${confirm_functions} · ${confirm_assets}"
     printf "%*s\n" $(((COLUMNS+${#confirmed_files})/2)) "$confirmed_files"
 }
+function git_branch_name() {
+  branch=$(git symbolic-ref HEAD 2> /dev/null | awk 'BEGIN{FS="/"} {print $NF}')
+  if [[ $branch == "" ]];
+  then
+    :
+  else
+    echo '- ('$branch')'
+  fi
+}
 ###
 ######### Titles
 function zsh_login_title() {

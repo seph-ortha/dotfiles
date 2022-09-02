@@ -7,17 +7,20 @@ zPrompt() {
 ## This type of expansion is also available using the
 ## -P option to the print builtin.
 # printf "%*s\n" 20 "Rightmost" 12 "Middle" 5 "Leftmost"
-columns=$(tput cols) ## Define user terminal collumn width.
+## --- • Variables
 new_line=$'\n' ## Variable for a new line.
+columns=$(tput cols)
 ## --- • Top Border
 prompt_border_1="$(printf "%%F{045}%$(tput cols)s%%f\n" " " | tr " " "-")"
 prompt_border_2="$(printf "%%F{62}%$(tput cols)s%%f\n" " " | tr " " "-")"
+
 ## --- • Title
 prompt_title_text="$USER's  Z-Shell  v$ZSH_VERSION : $SHELL"
 prompt_title_text_color="%F{105}$USER's%f %F{045}Z-Shell%f %F{139}v$ZSH_VERSION%f %F{045}:%f %F{153}$SHELL%f"
 prompt_title_sum="$(((${#prompt_title_color}+${#prompt_title_text})))"
 prompt_wd="%F{magenta}{%f%F{117}%3~%f%F{magenta}}%f" ## Prompt working directory
 prompt_title="$(printf "%*s\n" $(((columns+${#prompt_title_text_color}+45)/2)) "$prompt_title_text_color")"
+
 ## --- • Info
 prompt_info_left_text="{Culture Altar Studio}"
 prompt_info_left="%F{111}{%f%F{218}Culture%f %F{218}Altar%f %F{180}Studio%f%F{111}}%f"
@@ -26,15 +29,20 @@ prompt_info_right_color="%F{111}-={%f%F{115}ne+ultRA%f%F{111}}=-%f"
 prompt_info_sum="$(((${#prompt_info_left_text}+${#prompt_info_right})))"
 center_space="$(printf "%$(((columns-prompt_info_sum)))s" " ")"
 prompt_info="$(printf "%*s%*s%*s" 1 "$prompt_info_left" ${#prompt_info_left_text} "$center_space" $(((${#prompt_info_left_text}+center_space))) "$prompt_info_right_color")"
+
 ## --- • Location
 prompt_location="$(printf "%%F{045}:%%f %%F{121}Elos%%f %s\n" "$prompt_wd")"
+
 ## --- • Cursor
-prompt_line_5=" %F{069}⚘%f "
+prompt_line_5="${vcs_info_msg_0_} %F{069}⚘%f "
+
 ## Main zsh Prompt 
 PROMPT="${new_line}${prompt_border_2}${new_line}${prompt_title}${new_line}${prompt_info}${new_line}${new_line}${prompt_location}${new_line}${new_line}${prompt_line_5}"
 # PROMPT="${new_line}${prompt_border_1}${new_line}${prompt_border_2}${new_line}${prompt_title}${new_line}${prompt_info}${new_line}${new_line}${prompt_location}${new_line}${new_line}${prompt_line_5}"
+
 ## Right zsh Prompt
 RPROMPT="%F{223}%*%f %F{243}[%?]%f"
+
 ## PS2? for zsh
 PS2="⚘ "
 }

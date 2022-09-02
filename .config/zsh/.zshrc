@@ -28,6 +28,9 @@ zmodload zsh/complist
 compinit
 _comp_options+=(globdots)
 ###
+######### --- Git Prompt
+autoload -Uz vcs_info
+precmd() { vcs_info }
 ######### Enable colors
 autoload -U colors && colors
 stty stop undef		# Disable ctrl-s to freeze terminal.

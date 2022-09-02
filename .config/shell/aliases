@@ -23,6 +23,7 @@ alias \
 ###
 ######### • Programs
 alias \
+        doom="open /Applications/GZDoom.app" \
         mpd="mpd ~/.config/mpd/mpd.conf" \
         muson="mpd && ncmpcpp" \
         musoff="killall ncmpcpp && killall mpd" \

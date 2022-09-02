@@ -1,11 +1,17 @@
-##############################################################
-## Seph Ortha's NCMPCPP Configuration File. Copy it to      ##
+######### --- Seph's ncmpcpp/config
+##    _ __   ___ _ __ ___  _ __   ___ _ __  _ __
+##   | '_ \ / __| '_ ` _ \| '_ \ / __| '_ \| '_ \
+##   | | | | (__| | | | | | |_) | (__| |_) | |_) |
+##   |_| |_|\___|_| |_| |_| .__/ \___| .__/| .__/
+##                        |_|        |_|   |_|
+###
+## Seph's NCMPCPP Configuration File. Copy it to:           ##
 ## $XDG_CONFIG_HOME/ncmpcpp/config or $HOME/.ncmpcpp/config ##
 ## and set up your preferences.                             ##
 ##############################################################
-
+##
 #					Song Format
-
+#
 #			%l - length
 #			%f - filename
 #			%D - directory
@@ -23,8 +29,8 @@
 #			%C - comment
 #			%P - priority
 #			$R - begin right alignment
-
-#——————————————————————————————————————
+#
+#——————————————————————————————————————————————————————————————
 
 #					Directories
 
