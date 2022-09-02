@@ -14,15 +14,9 @@
 
 ######### --- Utility
 function zsh_refresh() { tput clear ; source "$XDG_CONFIG_HOME/zsh/.zshrc"; }
-function zsh_add_plugin() {
-    PLUGIN_NAME=$(echo $1 | cut -d "/" -f 2)
-    if [ -d "$ZDOTDIR/plugins/$PLUGIN_NAME" ]; then 
-        # For plugins
-        zsh_add_file "plugins/$PLUGIN_NAME/$PLUGIN_NAME.plugin.zsh" || \
-        zsh_add_file "plugins/$PLUGIN_NAME/$PLUGIN_NAME.zsh"
-    else
-        git clone "https://github.com/$1.git" "$ZDOTDIR/plugins/$PLUGIN_NAME"
-    fi
+function test_src_files() {
+    confirmed_files="${confirm_aliases} · ${confirm_functions} · ${confirm_assets}"
+    printf "%*s\n" $(((COLUMNS+${#confirmed_files})/2)) "$confirmed_files"
 }
 ###
 ######### Titles
@@ -61,5 +55,15 @@ function zsh_login_title2() {
     tput setaf 39
     printf "%$(tput cols)s\n" " " | tr " " "-"
     tput sgr0
+}
+######### --- Notifications
+function notifyWelcome() {
+    echo -e "\a"
+    terminal-notifier \
+    -title 'WELCOME TO THE Z SHELL' \
+    -subtitle "A place of wonder and magic.." \
+    -message "Hello, $USER.. may your visions find their tempo!" \
+    -sound zsh-sound.aiff \
+    -contentImage ~/.config/zsh/zsh_wizard.png
 }
 ###

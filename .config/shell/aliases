@@ -12,7 +12,8 @@ alias \
         bookmarks="cat $XDG_CONFIG_HOME/web/bookmarks" \
         fontbook="ls $FONT_DIR_HOME | less" \
         figlet-fonts="ls /usr/local/Cellar/figlet/2.2.5/share/figlet/fonts | less" \
-        sys-sounds="ls $HOME/Library/Sounds | less"
+        sys-sounds="ls $HOME/Library/Sounds | less" \
+        show-path="echo $PATH | tr ':' '\n'"
 ###
 ######### • Navigation
 alias \
@@ -25,8 +26,10 @@ alias \
         mpd="mpd ~/.config/mpd/mpd.conf" \
         muson="mpd && ncmpcpp" \
         musoff="killall ncmpcpp && killall mpd" \
-        vim="vim -u $XDG_CONFIG_HOME/vim/.vimrc" \
-        irssi="irssi --config="$XDG_CONFIG_HOME"/irssi/config --home="$XDG_DATA_HOME"/irssi"
+        irssi="irssi --config="$XDG_CONFIG_HOME"/irssi/config --home="$XDG_DATA_HOME"/irssi" \
+        ls="lsd" \
+        cat="bat" \
+        vim="nvim"
 ######### • Utility
 alias \
         ka="killall" \

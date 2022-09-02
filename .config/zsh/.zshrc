@@ -12,9 +12,9 @@
 ## `.zshrc' is sourced in interactive shells. 
 ###
 ######### General Aliases, Functions, Assets
-[ -f "$XDG_CONFIG_HOME/shell/aliases" ] && source "$XDG_CONFIG_HOME/shell/aliases" && zshell_aliases="shell_aliases"
-[ -f "$XDG_CONFIG_HOME/shell/functions" ] && source "$XDG_CONFIG_HOME/shell/functions" && zshell_functions="shell_functions"
-[ -f "$XDG_CONFIG_HOME/shell/assets" ] && source "$XDG_CONFIG_HOME/shell/assets" && zshell_assets="shell_assets"
+[ -f "$XDG_CONFIG_HOME/shell/aliases" ] && source "$XDG_CONFIG_HOME/shell/aliases" && confirm_aliases="shell_aliases"
+[ -f "$XDG_CONFIG_HOME/shell/functions" ] && source "$XDG_CONFIG_HOME/shell/functions" && confirm_functions="shell_functions"
+[ -f "$XDG_CONFIG_HOME/shell/assets" ] && source "$XDG_CONFIG_HOME/shell/assets" && confirm_assets="shell_assets"
 ###
 ######### Source: Zsh files
 add_zsh_file "zsh_options"
@@ -39,8 +39,8 @@ HISTSIZE=10000000
 SAVEHIST=10000000
 ###
 ######### • Plugins
-zsh_add_plugin "zsh-users/zsh-autosuggestions"
-zsh_add_plugin "zsh-users/zsh-syntax-highlighting"
+add_zsh_plugin "zsh-users/zsh-autosuggestions"
+add_zsh_plugin "zsh-users/zsh-syntax-highlighting"
 ###
 ######### • Keybindings
 bindkey -s '^u' 'zsh_refresh\n'
@@ -53,15 +53,6 @@ bindkey -s '^]' 'music_daemon\n'
 bindkey -s '^\' 'music_client\n'
 ###
 ######### • Shell Title
-zshrc_loaded_files="${zshell_aliases} · ${zshell_functions} · ${zshell_assets}"
-printf "%*s\n" $(((COLUMNS+${#zshrc_loaded_files})/2)) "$zshrc_loaded_files"
-zsh_title
-terminal-notifier \
-    -title 'WELCOME TO THE Z SHELL' \
-    -subtitle "A place of wonder and magic.." \
-    -message "Hello, $USER.. may your visions find their tempo!" \
-    -sound zsh-sound.aiff \
-    -contentImage ~/.config/zsh/zsh_wizard.png
-######### Ring Bell    
-echo -e "\a"
+test_src_files
+zsh_title ; notifyWelcome
 #########

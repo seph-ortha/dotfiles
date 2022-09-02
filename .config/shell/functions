@@ -1,6 +1,6 @@
 #!/bin/bash
 
-######### • Shell Functions
+######### Seph's Shell Functions
 ##        _          _ _    __                  _   _                 
 ##    ___| |__   ___| | |  / _|_   _ _ __   ___| |_(_) ___  _ __  ___ 
 ##   / __| '_ \ / _ \ | | | |_| | | | '_ \ / __| __| |/ _ \| '_ \/ __|
@@ -10,6 +10,29 @@
 ### -------------------------------------------------------------------
 
 ######### --------- • Functions
+## --- Shell Help
+function shell_help() {
+    echo "<--------- • Seph's Shell Help • --------->"
+    echo 
+    echo "<---> Keyboard Shortcuts"
+    echo "<--->   ^u   Source .rc"
+    echo "<--->   ^o   Explore Files with lf"
+    echo "<--->   ^p   Open CLI text editor"
+    echo "<--->   ^[   Create new shell script"
+    echo "<--->   ^]   Launch music daemon"
+    echo "<--->   ^\   Launch music client"
+    echo "<--->   ^'   Launch decalib program"
+    echo "<--->   ^;   View web bookmarks"
+    echo "<--->   ^/   Edit shell diary"
+    echo "<--->   ^k   List terminal colors"
+    echo 
+    echo "<---> Keyboard Commands"
+    echo "1.  • 'cash-intro' :------: Loads the login title screen."
+    echo "2.  • 'bash-learn' :------:  Navigates to the Bash sandbox directory."
+    echo "3.  • 'netvid' :----------:  Downloads videos from websites."
+    echo "4.  • 'shell-diary' :-----:  Displays the shell diary."
+    echo "5.  • 'shell-diary-e' :---:  Edit the shell diary."
+}
 ###
 ###### ------ • Utility
 ## Add a directory to PATH
@@ -33,6 +56,16 @@ bash_title() {
 }
 function add_zsh_file() {
     [ -f "$ZDOTDIR/$1" ] && source "$ZDOTDIR/$1"
+}
+function add_zsh_plugin() {
+    PLUGIN_NAME=$(echo $1 | cut -d "/" -f 2)
+    if [ -d "$ZDOTDIR/plugins/$PLUGIN_NAME" ]; then 
+        # For plugins
+        add_zsh_file "plugins/$PLUGIN_NAME/$PLUGIN_NAME.plugin.zsh" || \
+        add_zsh_file "plugins/$PLUGIN_NAME/$PLUGIN_NAME.zsh"
+    else
+        git clone "https://github.com/$1.git" "$ZDOTDIR/plugins/$PLUGIN_NAME"
+    fi
 }
 ###
 ######### --- Shell Functions

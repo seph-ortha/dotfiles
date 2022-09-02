@@ -56,6 +56,7 @@ export WGETRC="${XDG_CONFIG_HOME:-$HOME/.config}/wget/wgetrc"
 ######### Utility
 export FONT_DIR_HOME="$HOME/Library/Fonts"
 export current_shell="$0"
+export WWW_HOME="www.wikipedia.com" # w3m env var
 ###
 ######### Rust
 export CARGO_HOME="$XDG_DATA_HOME"/cargo
