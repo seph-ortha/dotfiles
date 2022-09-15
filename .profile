@@ -9,19 +9,7 @@
 ##                 |_|                           
 ## 
 ## ----------------------------------
-[ "$0" = "bash" ] && . ~/.config/bash/.bash_profile && exit
-######### • PATH
-PATH=$PATH:$HOME/bin:.
-###
-######### • Variables
-EDITOR=vim
-###
-######### • Exports
-export PATH EDITOR
-###
-######### • Source the .bashrc
-# if [ -f ~/.bashrc ]; then source ~/.bashrc; fi
-###
-
-echo "(SH) .profile loaded.."
-## ----------------------------------
+if [ "$0" = "bash" ]; then
+    . "$HOME/.config/bash/bash_profile"
+    exit 0
+fi

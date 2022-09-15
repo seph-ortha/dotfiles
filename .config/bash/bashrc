@@ -1,0 +1,55 @@
+######### Seph's .bashrc
+##      _               _              
+##     | |__   __ _ ___| |__  _ __ ___ 
+##     | '_ \ / _` / __| '_ \| '__/ __|
+##    _| |_) | (_| \__ \ | | | | | (__ 
+##   (_)_.__/ \__,_|___/_| |_|_|  \___|
+##                                     
+## -----------------------------------
+###
+
+# --------- Load bash_profile
+if [ -f "${HOME}/.config/bash/bash_profile" ]; then
+    source "${HOME}/.config/bash/bash_profile"
+    confirm_bash_profile=bash_profile
+fi
+
+# --------- Source global definitions
+if [ -f /etc/bashrc ]; then
+    source /etc/bashrc
+    confirm_etcbashrc=/etc/bashrc
+fi
+
+# --------- Options
+shopt -s autocd
+set bell-style audible
+set blink-matching-paren on
+set colored-completion-prefix on
+set colored-stats on
+set editing-mode vi
+set enable-keypad on
+set -o vi
+
+HISTSIZE=10000000
+SAVEHIST=10000000 # Save in cache dir:
+HISTFILE="${HOME}/.cache/bash/bash.history"
+
+# --------- Aliases, Functions, Prompt
+if [ -f "${XDG_CONFIG_HOME}/shell/aliases" ]; then
+    source "${XDG_CONFIG_HOME}/shell/aliases" &&
+    confirm_aliases=aliases
+fi
+if [ -f "${XDG_CONFIG_HOME}/shell/functions" ]; then
+    source "${XDG_CONFIG_HOME}/shell/functions" &&
+    confirm_functions=functions
+fi
+if [ -f "${XDG_CONFIG_HOME}/bash/bash_prompt" ]; then
+    source "${XDG_CONFIG_HOME}/bash/bash_prompt" &&
+    confirm_prompt=prompt
+fi
+
+# --------- Keybinds bind '"":""'
+bind '"\C-u":"bashRefresh\n"'
+
+# --------- Shell Title
+bashGreet

@@ -11,22 +11,22 @@
 ### -----------------------------------------------------
 ###
 ######### Source Exports
-[ -f "$XDG_CONFIG_HOME/shell/exports" ] && . "$XDG_CONFIG_HOME/shell/exports" && confirm_exports=exports
+if [ -f "$XDG_CONFIG_HOME/shell/exports" ]; then
+    . "$XDG_CONFIG_HOME/shell/exports" &&
+    export confirm_exports=exports
+fi
 ###
 ######### Check and add update $PATH
 if [ -d "/usr/local/sbin" ] ; then export PATH="$PATH:/usr/local/sbin"; fi
-if [ -d "$HOME/bin" ] ; then export PATH="$PATH:$HOME/bin"; fi
 if [ -d "$HOME/.local/bin" ] ; then export PATH="$PATH:$HOME/.local/bin"; fi
+if [ -d "$HOME/dev/shell/bash/scripts" ] ; then export PATH="$PATH:$HOME/dev/shell/bash/scripts"; fi
 if [ -d "/Applications" ] ; then export PATH="$PATH:/Applications"; fi
 ###
 ######### Cargo Rust
-if [ -f "$XDG_DATA_HOME/.cargo/env" ]; then
-    . "$XDG_DATA_HOME/.cargo/env" && confirm_cargo=cargo/env
+if [ -f "$XDG_DATA_HOME/cargo/env" ]; then
+    . "$XDG_DATA_HOME/cargo/env"
+    export confirm_cargo=cargo/env
 fi
 ###
 # ENV=$HOME/.shinit; export ENV
-######### • Files Loaded
-profile_files="profile: ${confirm_xdg} · ${confirm_exports} · ${confirm_cargo}"
-printf "\n%*s\n" $(((COLUMNS+${#profile_files})/2)) "$profile_files"
-###
 ### -----------------------------------------------------

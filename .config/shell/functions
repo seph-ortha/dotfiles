@@ -1,5 +1,3 @@
-#!/bin/bash
-
 ######### Seph's Shell Functions
 ##        _          _ _    __                  _   _                 
 ##    ___| |__   ___| | |  / _|_   _ _ __   ___| |_(_) ___  _ __  ___ 
@@ -10,8 +8,57 @@
 ### -------------------------------------------------------------------
 
 ######### --------- • Functions
-## --- Shell Help
-function shell_help() {
+
+# --------- Bash Functions
+bashGreet() {
+    startup_files_loaded="${purple60}${confirm_bash_profile} - ${confirm_exports} - ${confirm_cargo} - ${confirm_etcbashrc} - bashrc - ${confirm_aliases} - ${confirm_functions} - ${confirm_prompt}${norm}"
+    echo "${purple62}$(repeatChar "-")${norm}"
+    centerStringColor "${startup_files_loaded}" "18"
+    echo "${green85}$(figlet -w $COLUMNS -c -f chunky Bash)${norm}"
+    echo "Welcome to Bash."  | terminal-notifier -sound dsbgact.aiff
+    bash_welcome="${purple111}Welcome to Bash${norm}"
+    centerStringColor "${bash_welcome}" "18"
+    echo -e "\a"
+}
+bash_login_title() {
+    tput setaf 85; figlet -w $COLUMNS -c Bourne-Again Shell; tput sgr0
+}
+bash_title() {
+    tput setaf 141; printf "%$(tput cols)s\n\n" " " | tr " " "-"; tput sgr0
+    tput setaf 85; figlet -w $COLUMNS -c -f chunky Bash; tput sgr0
+}
+bashRefresh() { 
+    tput clear ; source "$XDG_CONFIG_HOME/bash/bashrc"
+}
+
+# --------- Zsh Functions
+add_zsh_file() {
+    [ -f "$ZDOTDIR/$1" ] && source "$ZDOTDIR/$1"
+}
+add_zsh_plugin() {
+    PLUGIN_NAME=$(echo $1 | cut -d "/" -f 2)
+    if [ -d "$ZDOTDIR/plugins/$PLUGIN_NAME" ]; then 
+        # For plugins
+        add_zsh_file "plugins/$PLUGIN_NAME/$PLUGIN_NAME.plugin.zsh" || \
+        add_zsh_file "plugins/$PLUGIN_NAME/$PLUGIN_NAME.zsh"
+    else
+        git clone "https://github.com/$1.git" "$ZDOTDIR/plugins/$PLUGIN_NAME"
+    fi
+}
+
+######### --- Shell Functions
+pathadd() { 
+    if [ -d "$1" ] && [[ ":$PATH:" != *":$1:"* ]]; then
+        PATH="${PATH:+"$PATH:"}$1"
+    fi ## Add a directory to PATH
+}
+checkShell() {
+    case "$-" in 
+        *i*) echo This shell is interactive;;
+        *) echo This shell is not interactive;;
+    esac
+}
+shell_help() {
     echo "<--------- • Seph's Shell Help • --------->"
     echo 
     echo "<---> Keyboard Shortcuts"
@@ -33,50 +80,20 @@ function shell_help() {
     echo "4.  • 'shell-diary' :-----:  Displays the shell diary."
     echo "5.  • 'shell-diary-e' :---:  Edit the shell diary."
 }
-###
-###### ------ • Utility
-## Add a directory to PATH
-pathadd() {
-    if [ -d "$1" ] && [[ ":$PATH:" != *":$1:"* ]]; then
-        PATH="${PATH:+"$PATH:"}$1"
-    fi
+neofetchGreeting() {
+    tput clear ## clear the screen
+    # neofetch ASCII art
+    neofetch --ascii ~/.config/neofetch/ascii_art/bloom
+    # Seph's Personal Greeting
+    printf "how ya doin.. Welcome to the shell! v.%s\n%s, you're at %s\nit's %s\n..time to do something radical!\n\n" "$SHELL" "$(whoami)" "$(pwd)" "$(date)"
 }
-checkShell() {
-    case "$-" in 
-        *i*) echo This shell is interactive;;
-        *) echo This shell is not interactive;;
-    esac
-}
-bash_login_title() {
-    tput setaf 85; figlet -w $COLUMNS -c Bourne-Again Shell; tput sgr0
-}
-bash_title() {
-    tput setaf 141; printf "%$(tput cols)s\n\n" " " | tr " " "-"; tput sgr0
-    tput setaf 85; figlet -w $COLUMNS -c -f chunky Bash; tput sgr0
-}
-function add_zsh_file() {
-    [ -f "$ZDOTDIR/$1" ] && source "$ZDOTDIR/$1"
-}
-function add_zsh_plugin() {
-    PLUGIN_NAME=$(echo $1 | cut -d "/" -f 2)
-    if [ -d "$ZDOTDIR/plugins/$PLUGIN_NAME" ]; then 
-        # For plugins
-        add_zsh_file "plugins/$PLUGIN_NAME/$PLUGIN_NAME.plugin.zsh" || \
-        add_zsh_file "plugins/$PLUGIN_NAME/$PLUGIN_NAME.zsh"
-    else
-        git clone "https://github.com/$1.git" "$ZDOTDIR/plugins/$PLUGIN_NAME"
-    fi
-}
-###
-######### --- Shell Functions
-function shell_add_file() {
+shell_add_file() {
     [ -f "$XDG_CONFIG_HOME/shell/$1" ] && source "$XDG_CONFIG_HOME/shell/$1"
 }
-function bash_refresh() { 
-    tput clear ; source "$HOME/.bashrc"
-} 
+myShells() {
+    awk -F "/" '/^\// {print $NF}' /etc/shells
+}
 
-###
 ############ --- Utility
 lfcd() {
     tmp="$(mktmp)"
@@ -99,14 +116,30 @@ music_daemon() {
 music_client() {
     ncmpcpp ## --- • Music Client
 }
-decalib() {
-    decalib·generator ## --- • Decalib
-}
 ###
 ######### --- Design Utility
+repeatChar() {
+    printf "%$(tput cols)s\n" " " | tr " " "$1"
+}
 centerLine() {
     for i in $1; do
         printf "%*s\n" $(((COLUMNS+${#1})/2)) "$1"
+    done
+}
+centerString() {
+    width=$(tput cols)
+    textsize=${#1}
+    span=$((($width + $textsize) / 2))
+    for line in "$1"; do
+        printf "%${span}s\n" "$line"
+    done
+}
+centerStringColor() {
+    width=$(tput cols)
+    textsize=${#1}
+    span=$((($width + $textsize + $2) / 2))
+    for line in "$1"; do
+        printf "%${span}s\n" "$line"
     done
 }
 divLine() {
@@ -114,7 +147,7 @@ divLine() {
         printf "%$(tput cols)s\n" " " | tr " " "$1"
     done
 }
-function tputColors() {
+tputColors() {
     tput clear
     tput bold
     tput setaf 86
@@ -133,5 +166,5 @@ function tputColors() {
         echo -e "█$i \c"
     done; echo
 }
-###
+
 ### -------------------------------------------------------------------

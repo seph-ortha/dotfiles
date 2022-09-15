@@ -1,3 +1,5 @@
+#!/bin/sh
+
 ######### • Seph's Shell Aliases
 ##        _          _ _         _ _                     
 ##    ___| |__   ___| | |   __ _| (_) __ _ ___  ___  ___ 
@@ -9,44 +11,51 @@
 
 ######### • Info
 alias \
-        bookmarks="cat $XDG_CONFIG_HOME/web/bookmarks" \
-        fontbook="ls $FONT_DIR_HOME | less" \
-        figlet-fonts="ls /usr/local/Cellar/figlet/2.2.5/share/figlet/fonts | less" \
-        sys-sounds="ls $HOME/Library/Sounds | less" \
-        show-path="echo $PATH | tr ':' '\n'"
+        bookmarks='cat $XDG_CONFIG_HOME/web/bookmarks' \
+        fontbook='ls $FONT_DIR_HOME | less' \
+        figlet-fonts='ls /usr/local/Cellar/figlet/2.2.5/share/figlet/fonts | less' \
+        sys-sounds='ls $HOME/Library/Sounds | less' \
+        show-path='echo $PATH | tr ":" "\n"' \
 ###
 ######### • Navigation
 alias \
-        ..="cd .." \
-        font_dir="$HOME/Library/Fonts" \
-        web_dir="$XDG_CONFIG_HOME/web"
+        ..='cd ..' \
+        font_dir='$HOME/Library/Fonts' \
+        web_dir='$XDG_CONFIG_HOME/web' \
+        bashdev='cd ~/dev/shell/bash' \
+        zshdev='cd ~/dev/shell/zsh' \
+        dashdev='cd ~/dev/shell/dash' \
+        prodev='cd ~/dev/shell/projects'
 ###
 ######### • Programs
 alias \
-        doom="open /Applications/GZDoom.app" \
-        mpd="mpd ~/.config/mpd/mpd.conf" \
-        muson="mpd && ncmpcpp" \
-        musoff="killall ncmpcpp && killall mpd" \
-        irssi="irssi --config="$XDG_CONFIG_HOME"/irssi/config --home="$XDG_DATA_HOME"/irssi" \
-        ls="lsd" \
-        cat="bat" \
-        vim="nvim"
+        doom='open /Applications/GZDoom.app' \
+        mpd='mpd ~/.config/mpd/mpd.conf' \
+        muson='mpd && ncmpcpp' \
+        musoff='killall ncmpcpp && killall mpd' \
+        irssi='irssi --config="$XDG_CONFIG_HOME"/irssi/config --home="$XDG_DATA_HOME"/irssi' \
+        ls='lsd' \
+        cat='bat' \
+        vim='nvim' \
+        decalib="$HOME/.local/share/decalib/decalib.sh" \
+        bash="bash --rcfile $XDG_CONFIG_HOME/bash/bashrc"
 ######### • Utility
 alias \
-        ka="killall" \
-        grep="grep --color=auto" \
+        ka='killall' \
+        grep='grep --color=auto' \
         show_files='$(defaults write com.apple.Finder AppleShowAllFiles true && killall Finder)' \
-        hide_files='$(defaults write com.apple.Finder AppleShowAllFiles false && killall Finder)' \
-        config='/usr/bin/git --git-dir=$HOME/dev/repos/dotfiles/ --work-tree=$HOME' 
+        hide_files='$(defaults write com.apple.Finder AppleShowAllFiles false && killall Finder)'
 ###
 ######### • Dot Files
 alias \
-        zrc="$EDITOR $XDG_CONFIG_HOME/zsh/.zshrc" \
-        src-bash=". $XDG_CONFIG_HOME/bash/.bashrc" \
-        src-zsh=". $XDG_CONFIG_HOME/zsh/.zshrc"
+        zrc='$EDITOR $XDG_CONFIG_HOME/zsh/.zshrc' \
+        src-bash='. $XDG_CONFIG_HOME/bash/.bashrc' \
+        src-zsh='. $XDG_CONFIG_HOME/zsh/.zshrc'
 ###
 
 #--------- Git
 alias \
+        config='/usr/bin/git --git-dir=$HOME/dev/repos/dotfiles/ --work-tree=$HOME' \
         gpush-config="config push https://github.com/sephortha/dotfiles.git"
+###
 ### -----------------------------------------------------

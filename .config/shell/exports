@@ -43,11 +43,31 @@ export READER="zathura"
 export FILE="lf"
 ###
 ######### Colors
-export blue045="$(tput setaf 045)"
-export purple062="$(tput setaf 062)"
+export norm=$(tput sgr0)
+export purple54=$(tput setaf 54)
+export purple111=$(tput setaf 111)
+export purple105=$(tput setaf 105)
+export blue75=$(tput setaf 75)
 export blue=$(tput setaf 4)
+export green85=$(tput setaf 85)
 export normal=$(tput sgr0)
 export reset=$(tput sgr0)
+export purple60=$(tput setaf 60)
+export purple62=$(tput setaf 62)
+export purple63=$(tput setaf 63)
+export purple99=$(tput setaf 99)
+export purple75=$(tput setaf 75)
+export purple129=$(tput setaf 129)
+export blue45=$(tput setaf 45)
+export blue87=$(tput setaf 87)
+export blue153=$(tput setaf 153)
+export green36=$(tput setaf 36)
+export green50=$(tput setaf 50)
+export pink132=$(tput setaf 132)
+export pink163=$(tput setaf 163)
+export pink139=$(tput setaf 139)
+export pink212=$(tput setaf 212)
+export yellow144=$(tput setaf 144)
 ###
 ######### Misc
 ## Wget Config get from XDG_CONFIG_HOME or (:-) ~/.config....
@@ -68,4 +88,8 @@ export RUSTUP_HOME="$XDG_DATA_HOME"/rustup
 export SHELL_SESSION_DIR="$XDG_STATE_HOME/zsh/sessions"
 export SHELL_SESSION_FILE="$SHELL_SESSION_DIR/$TERM_SESSION_ID"
 ###
+# --------- Decalib Environment
+export DECALIB_CONFIG_DIR=$XDG_CONFIG_HOME/decalib
+export DECALIB_CONFIG_FILE=$XDG_CONFIG_HOME/decalib/decalib_config
+export DECALIB_DEV_DIR=$HOME/dev/shell/projects/decalib
 ### ----------------------------------------------------------

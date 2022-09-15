@@ -1,10 +1,18 @@
-#!/bin/bash
+# --------- Bash Prompt
+#    _               _                                          _
+#   | |__   __ _ ___| |__       _ __  _ __ ___  _ __ ___  _ __ | |_
+#   | '_ \ / _` / __| '_ \     | '_ \| '__/ _ \| '_ ` _ \| '_ \| __|
+#   | |_) | (_| \__ \ | | |    | |_) | | | (_) | | | | | | |_) | |_
+#   |_.__/ \__,_|___/_| |_|____| .__/|_|  \___/|_| |_| |_| .__/ \__|
+#                        |_____|_|                       |_|
+# ---------
 
 bash_prompt_1() {
-    new_line=$'\n' ## Variable for a new line.
-    bash_prompt_br1="$(tput setaf 141; printf "%$(tput cols)s" " " | tr " " "-"; tput sgr0)"
-    bash_prompt_title_text="$USER's  BASH  v$BASH_VERSION : $SHELL"
-    bash_prompt_title="$(printf "%*s" $(((COLUMNS+${#bash_prompt_title_text})/2)) "${bash_prompt_title_text}")"
-    PS1="${new_line}${bash_prompt_br1}${bash_prompt_title}${new_line}: \h {\w}${new_line}${new_line} ⚘ "
+    bash_prompt_border="$(tput setaf 62; repeatChar "-"; tput sgr0)"
+    # bash_prompt_info=$(centerString "\u's BASH v\v : $BASH\n")
+    bash_prompt_info=$(centerStringColor "${purple105}\u's ${blue45}BASH ${pink139}v\v ${blue45}:${norm} ${blue153}${BASH}${norm}\n" "57")
+    bash_prompt_utility="${purple129}: ${green50}\h ${pink212}{${blue87}\w${pink212}}${norm}\n\n"
+    bash_prompt_cursor="${purple75} ⚘ ${norm}"
+    PS1="\n${bash_prompt_border}${bash_prompt_info}${bash_prompt_utility}${bash_prompt_cursor}"
 }
 bash_prompt_1
