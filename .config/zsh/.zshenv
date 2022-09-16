@@ -18,13 +18,9 @@
 # sourced for _every_ shell (unless invoked with zsh
 # -f).
 
-######### • Use the XDG directory convention
-if [ -f "$HOME/.config/shell/xdg" ]; then
-    source "$HOME/.config/shell/xdg"
-fi
-###
 ######### • Zsh dotfiles outside of $HOME.
 if [ -d "$XDG_CONFIG_HOME/zsh" ]; then
     ZDOTDIR="$XDG_CONFIG_HOME/zsh"
 fi
 ###
+. "/Users/seph_ortha/.local/share/cargo/env"

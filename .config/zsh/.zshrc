@@ -18,7 +18,6 @@
 ###
 ######### Source: Zsh files
 add_zsh_file "zsh_options"
-add_zsh_file "zsh_prompt"
 add_zsh_file "zsh_functions"
 ###
 ######### Tab Completion
@@ -31,6 +30,7 @@ _comp_options+=(globdots)
 ######### --- Git Prompt
 autoload -Uz vcs_info
 precmd() { vcs_info }
+add_zsh_file "zsh_prompt"
 ######### Enable colors
 autoload -U colors && colors
 stty stop undef		# Disable ctrl-s to freeze terminal.
