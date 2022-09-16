@@ -10,43 +10,9 @@
 ######### --------- • Functions
 
 # --------- Bash Functions
-bashGreet() {
-    startup_files_loaded="${purple60}${confirm_bash_profile} - ${confirm_exports} - ${confirm_cargo} - ${confirm_etcbashrc} - bashrc - ${confirm_aliases} - ${confirm_functions} - ${confirm_prompt}${norm}"
-    echo "${purple62}$(repeatChar "-")${norm}"
-    centerStringColor "${startup_files_loaded}" "18"
-    echo "${green85}$(figlet -w $COLUMNS -c -f chunky Bash)${norm}"
-    echo "Welcome to Bash."  | terminal-notifier -sound dsbgact.aiff
-    bash_welcome="${purple111}Welcome to Bash${norm}"
-    centerStringColor "${bash_welcome}" "18"
-    echo -e "\a"
-}
-bash_login_title() {
-    tput setaf 85; figlet -w $COLUMNS -c Bourne-Again Shell; tput sgr0
-}
-bash_title() {
-    tput setaf 141; printf "%$(tput cols)s\n\n" " " | tr " " "-"; tput sgr0
-    tput setaf 85; figlet -w $COLUMNS -c -f chunky Bash; tput sgr0
-}
-bashRefresh() { 
-    tput clear ; source "$XDG_CONFIG_HOME/bash/bashrc"
-}
 
-# --------- Zsh Functions
-function add_zsh_file() {
-    [ -f "$ZDOTDIR/$1" ] && source "$ZDOTDIR/$1"
-}
-function add_zsh_plugin() {
-    PLUGIN_NAME=$(echo $1 | cut -d "/" -f 2)
-    if [ -d "$ZDOTDIR/plugins/$PLUGIN_NAME" ]; then 
-        # For plugins
-        add_zsh_file "plugins/$PLUGIN_NAME/$PLUGIN_NAME.plugin.zsh" || \
-        add_zsh_file "plugins/$PLUGIN_NAME/$PLUGIN_NAME.zsh"
-    else
-        git clone "https://github.com/$1.git" "$ZDOTDIR/plugins/$PLUGIN_NAME"
-    fi
-}
 
-######### --- Shell Functions
+# --------- Shell Functions
 pathadd() { 
     if [ -d "$1" ] && [[ ":$PATH:" != *":$1:"* ]]; then
         PATH="${PATH:+"$PATH:"}$1"
@@ -58,27 +24,34 @@ checkShell() {
         *) echo This shell is not interactive;;
     esac
 }
-shell_help() {
-    echo "<--------- • Seph's Shell Help • --------->"
+shellHelp() {
+    echo
+    echo "${pink201}===${norm} ${purple153}Seph's Shell Help${norm} ${pink201}===${norm}"
     echo 
-    echo "<---> Keyboard Shortcuts"
-    echo "<--->   ^u   Source .rc"
-    echo "<--->   ^o   Explore Files with lf"
-    echo "<--->   ^p   Open CLI text editor"
-    echo "<--->   ^[   Create new shell script"
-    echo "<--->   ^]   Launch music daemon"
-    echo "<--->   ^\   Launch music client"
-    echo "<--->   ^'   Launch decalib program"
-    echo "<--->   ^;   View web bookmarks"
-    echo "<--->   ^/   Edit shell diary"
-    echo "<--->   ^k   List terminal colors"
+    echo "${pink212}---------${norm} ${blue81}Keyboard Shortcuts${norm} ${pink212}---------${norm}"
+    echo
+    echo "           ${green50}^r${norm}       ${yellow192}Refresh Shell${norm}"
+    echo "           ${green50}^e${norm}       ${yellow192}Explore Files with lf${norm}"
+    echo "           ${green50}^v${norm}       ${yellow192}Vim explore current directory${norm}"
+    echo "           ${green50}^s${norm}       ${yellow192}Create new bash script${norm}"
+    echo "           ${green50}^]${norm}       ${yellow192}Load music deamon and client${norm}"
+    echo "           ${green50}^[${norm}       ${yellow192}Unload music deamon and client${norm}"
+    echo "           ${green50}^\\${norm}       ${yellow192}Music Client${norm}"
+    echo "           ${green50}^h${norm}       ${yellow192}Help page${norm}"
+    echo
+    echo "${pink212}--------------------------------------${norm}"
     echo 
-    echo "<---> Keyboard Commands"
-    echo "1.  • 'cash-intro' :------: Loads the login title screen."
-    echo "2.  • 'bash-learn' :------:  Navigates to the Bash sandbox directory."
-    echo "3.  • 'netvid' :----------:  Downloads videos from websites."
-    echo "4.  • 'shell-diary' :-----:  Displays the shell diary."
-    echo "5.  • 'shell-diary-e' :---:  Edit the shell diary."
+    echo "${pink212}---------${norm} ${blue81}Shell Commands${norm} ${pink212}---------${norm}"
+    echo
+    echo "  ${green50}show-path${norm}         ${yellow192}List of elements in PATH.${norm}"
+    echo "  ${green50}bash-script${norm}       ${yellow192}Create new bash script utility.${norm}"
+    echo "  ${green50}netvid${norm}            ${yellow192}Downloads videos from websites.${norm}"
+    echo "  ${green50}bookmarks${norm}         ${yellow192}Displays the web bookmarks.${norm}"
+    echo "  ${green50}fontbook${norm}          ${yellow192}Show installed fonts.${norm}"
+    echo
+    echo "${pink212}----------------------------------${norm}"
+    echo
+    echo "${pink201}==================================${norm}"
 }
 neofetchGreeting() {
     tput clear ## clear the screen
@@ -92,6 +65,10 @@ shell_add_file() {
 }
 myShells() {
     awk -F "/" '/^\// {print $NF}' /etc/shells
+}
+depositFxSound () {
+    mv "${1}" "${HOME}/Library/Sounds" &&
+    echo "..sound moved to ${HOME}/Library/Sounds"
 }
 
 ############ --- Utility
@@ -110,11 +87,16 @@ edit_text() {
 write_script() {
     learn-bash ## --- • Write Script
 }
-music_daemon() {
-    mpd ## --- • Music Daemon
+musicOn () {
+    music_daemon
+    music_client
 }
-music_client() {
-    ncmpcpp ## --- • Music Client
+musicOff () {
+    killall music_client
+    killall mpd
+}
+musicPlayer () {
+    ${music_client}
 }
 ###
 ######### --- Design Utility
@@ -142,12 +124,8 @@ centerStringColor() {
         printf "%${span}s\n" "$line"
     done
 }
-divLine() {
-    for i in $1; do
-        printf "%$(tput cols)s\n" " " | tr " " "$1"
-    done
-}
-tputColors() {
+
+printColors() {
     tput clear
     tput bold
     tput setaf 86
@@ -167,4 +145,14 @@ tputColors() {
     done; echo
 }
 
+# --------- Git Functions
+gitBranchName () {
+    branch=$(git symbolic-ref HEAD 2> /dev/null | awk 'BEGIN{FS="/"} {print $NF}')
+    if [[ ${branch} == "" ]];
+    then
+    :
+    else
+    echo '- ('${branch}')'
+    fi
+}
 ### -------------------------------------------------------------------

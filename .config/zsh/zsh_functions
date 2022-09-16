@@ -1,41 +1,63 @@
 #!/bin/zsh
 
-######### --- Seph's Zsh Functions
-##   
-##            _          __                  _   _
-##    _______| |__      / _|_   _ _ __   ___| |_(_) ___  _ __  ___
-##   |_  / __| '_ \    | |_| | | | '_ \ / __| __| |/ _ \| '_ \/ __|
-##    / /\__ \ | | |   |  _| |_| | | | | (__| |_| | (_) | | | \__ \
-##   /___|___/_| |_|___|_|  \__,_|_| |_|\___|\__|_|\___/|_| |_|___/
-##                |_____|
-##   
-##   
-###
+# --------- Seph's Zsh Functions
+# -------------------------------------------------------------------
+#            _          __                  _   _
+#    _______| |__      / _|_   _ _ __   ___| |_(_) ___  _ __  ___
+#   |_  / __| '_ \    | |_| | | | '_ \ / __| __| |/ _ \| '_ \/ __|
+#    / /\__ \ | | |   |  _| |_| | | | | (__| |_| | (_) | | | \__ \
+#   /___|___/_| |_|___|_|  \__,_|_| |_|\___|\__|_|\___/|_| |_|___/
+#                |_____|
+#   
+# https://zsh.sourceforge.io/Doc/Release/Functions.html#Functions
+# -------------------------------------------------------------------
 
-######### --- Utility
-function zsh_refresh() { tput clear ; source "$XDG_CONFIG_HOME/zsh/.zshrc"; }
-function test_src_files() {
-    confirmed_files="${confirm_aliases} · ${confirm_functions} · ${confirm_assets}"
-    printf "%*s\n" $(((COLUMNS+${#confirmed_files})/2)) "$confirmed_files"
+# --------- Zsh Functions
+addZshFile () {
+    [ -f "${ZDOTDIR}/${1}" ] && source "${ZDOTDIR}/${1}"
 }
-function git_branch_name() {
-  branch=$(git symbolic-ref HEAD 2> /dev/null | awk 'BEGIN{FS="/"} {print $NF}')
-  if [[ $branch == "" ]];
-  then
-    :
-  else
-    echo '- ('$branch')'
-  fi
+addShellFile () {
+    [ -f "${XDG_CONFIG_HOME}/shell/${1}" ] && source "${XDG_CONFIG_HOME}/shell/${1}"
 }
-###
-######### Titles
-function zsh_login_title() {
-    tput setaf 81; figlet -w $COLUMNS -c Z-Shell; tput sgr0
+zshRefresh() {
+    tput clear
+    addZshFile ".zshenv"
+    addZshFile ".zprofile"
+    addZshFile ".zshrc"
 }
-function zsh_title() {
-    tput setaf 81; figlet -w $COLUMNS -c Z-Shell; tput sgr0
+addZshPlugin () {
+    PLUGIN_NAME=$(echo $1 | cut -d "/" -f 2)
+    if [ -d "${ZDOTDIR}/plugins/${PLUGIN_NAME}" ]; then 
+        # For plugins
+        addZshFile "plugins/${PLUGIN_NAME}/${PLUGIN_NAME}.plugin.zsh" || \
+        addZshFile "plugins/${PLUGIN_NAME}/${PLUGIN_NAME}.zsh"
+    else
+        git clone "https://github.com/${1}.git" "${ZDOTDIR}/plugins/${PLUGIN_NAME}"
+    fi
 }
-function zsh_login_title2() {
+
+# --------- Notifications
+notifyWelcome () {
+    echo -e "\a"
+    terminal-notifier \
+    -title 'WELCOME TO THE Z SHELL' \
+    -subtitle "A place of wonder and magic.." \
+    -message "Hello, $USER.. may your visions find their tempo!" \
+    -sound zsh-sound.aiff \
+    -contentImage ~/.config/zsh/zsh_wizard.png
+}
+
+# --------- Title Functions
+zshTitle () {
+    zsh_start_files_loaded="${purple60}${confirm_shell_profile} - ${confirm_exports} - ${confirm_cargo} - ${confirm_zsh_functions} - zshrc - ${confirm_aliases} - ${confirm_functions} - ${confirm_zsh_prompt}${norm}"
+    zsh_welcome="${purple111}Welcome to Z-Shell${norm}"
+    echo "${purple62}$(repeatChar "-")${norm}"
+    centerStringColor "${zsh_start_files_loaded}" "18"
+    echo "${blue81}$(figlet -w $COLUMNS -c Z-Shell)${norm}"
+    centerStringColor "${zsh_welcome}" "18"
+    notifyWelcome
+}
+zshTitleLogin () {
     tput clear
     yellow222="$(tput setaf 222)"
     green84="$(tput setaf 84)"
@@ -65,14 +87,21 @@ function zsh_login_title2() {
     printf "%$(tput cols)s\n" " " | tr " " "-"
     tput sgr0
 }
-######### --- Notifications
-function notifyWelcome() {
-    echo -e "\a"
-    terminal-notifier \
-    -title 'WELCOME TO THE Z SHELL' \
-    -subtitle "A place of wonder and magic.." \
-    -message "Hello, $USER.. may your visions find their tempo!" \
-    -sound zsh-sound.aiff \
-    -contentImage ~/.config/zsh/zsh_wizard.png
+
+# --------- Zsh Prompt
+precmd () {
+  vcs_info
+}
+zshPrompt () {
+    zstyle ':vcs_info:git:*' formats '%F{121}%s%f %F{140}%b%f'
+    newline=$'\n'
+    zsh_prompt_border="$(tput setaf 62; repeatChar "-"; tput sgr0)"
+    zsh_prompt_info=$(centerStringColor "%F{105}%n's%f %F{045}Z-Shell%f %F{139}v${ZSH_VERSION}%f %F{045}:%f %F{153}%N%f" "31")
+    zsh_prompt_utility="${newline}%F{129}:%f %F{50}%m%f %f%F{212}{%f%F{087}%3~%f%F{212}}%f${newline}${newline}"
+    zsh_prompt_cursor='${vcs_info_msg_0_} %F{069}⚘%f '
+
+    PROMPT="${zsh_prompt_border}${zsh_prompt_info}${zsh_prompt_utility}${zsh_prompt_cursor}"
+    RPROMPT="%F{223}%*%f %F{243}[%?]%f"
+    PS2="⚘ "  
 }
 ###

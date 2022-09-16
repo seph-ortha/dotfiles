@@ -19,6 +19,9 @@
 # -f).
 
 # --------- Zsh dotfiles outside of $HOME.
-if [ -d "$HOME/.config/zsh" ]; then
-    ZDOTDIR="$HOME/.config/zsh"
+if [ -d "${HOME}/.config/shell/xdg" ]; then
+    source "${HOME}/.config/shell/xdg"
+fi
+if [ -d "${HOME}/.config/zsh" ]; then
+    ZDOTDIR="${HOME}/.config/zsh"
 fi

@@ -9,15 +9,9 @@
 ###
 
 # --------- Load bash_profile
-if [ -f "${HOME}/.config/bash/bash_profile" ]; then
-    source "${HOME}/.config/bash/bash_profile"
-    confirm_bash_profile=bash_profile
-fi
-
-# --------- Source global definitions
-if [ -f /etc/bashrc ]; then
-    source /etc/bashrc
-    confirm_etcbashrc=/etc/bashrc
+if [ -f "$HOME/.config/bash/bash_profile" ]; then
+    source "$HOME/.config/bash/bash_profile" &&
+    confirm_bash_profile="bash_profile"
 fi
 
 # --------- Options
@@ -35,21 +29,18 @@ SAVEHIST=10000000 # Save in cache dir:
 HISTFILE="${HOME}/.cache/bash/bash.history"
 
 # --------- Aliases, Functions, Prompt
-if [ -f "${XDG_CONFIG_HOME}/shell/aliases" ]; then
-    source "${XDG_CONFIG_HOME}/shell/aliases" &&
-    confirm_aliases=aliases
-fi
-if [ -f "${XDG_CONFIG_HOME}/shell/functions" ]; then
-    source "${XDG_CONFIG_HOME}/shell/functions" &&
-    confirm_functions=functions
-fi
-if [ -f "${XDG_CONFIG_HOME}/bash/bash_prompt" ]; then
-    source "${XDG_CONFIG_HOME}/bash/bash_prompt" &&
-    confirm_prompt=prompt
-fi
+addShellFile "aliases" && confirm_aliases="shell_aliases"
+addShellFile "functions" && confirm_functions="shell_functions"
+addBashFile "bash_prompt" && confirm_bash_prompt="bash_prompt"
 
 # --------- Keybinds bind '"":""'
-bind '"\C-u":"bashRefresh\n"'
+bind '"\C-r":"bashRefresh\n"'
+bind '"\C-e": "lfcd\n"'
+bind '"\C-v": "vim .\n"'
+bind '"\C-s": "bash-script\n"'
+bind '"\C-.": "musicOn\n"'
+bind '"\C-,": "musicOff\n"'
+bind '"\C-h": "shellHelp\n"'
 
 # --------- Shell Title
 bashGreet

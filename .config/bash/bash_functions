@@ -1,0 +1,43 @@
+# --------- Seph's Bash Functions
+# ---------------------------------------------------------------------------
+#    _               _          __                  _   _                 
+#   | |__   __ _ ___| |__      / _|_   _ _ __   ___| |_(_) ___  _ __  ___ 
+#   | '_ \ / _` / __| '_ \    | |_| | | | '_ \ / __| __| |/ _ \| '_ \/ __|
+#   | |_) | (_| \__ \ | | |   |  _| |_| | | | | (__| |_| | (_) | | | \__ \
+#   |_.__/ \__,_|___/_| |_|___|_|  \__,_|_| |_|\___|\__|_|\___/|_| |_|___/
+#                        |_____|                                          
+#
+# ---------------------------------------------------------------------------
+
+# --------- Bash Functions
+addBashFile () {
+    [ -f "${XDG_CONFIG_HOME}/bash/${1}" ] && source "${XDG_CONFIG_HOME}/bash/${1}"
+}
+addShellFile () {
+    [ -f "${XDG_CONFIG_HOME}/shell/${1}" ] && source "${XDG_CONFIG_HOME}/shell/${1}"
+}
+bashRefresh() {
+    tput clear
+    addBashFile "bash_profile"
+    addBashFile "bashrc"
+}
+bashGreet() {
+    startup_files_loaded="${purple60}${confirm_bash_profile} - ${confirm_exports} - ${confirm_cargo} - bashrc - ${confirm_aliases} - ${confirm_functions} - ${confirm_bash_prompt}${norm}"
+    echo "${purple62}$(repeatChar "-")${norm}"
+    centerStringColor "${startup_files_loaded}" "18"
+    echo "${green85}$(figlet -w $COLUMNS -c -f chunky Bash)${norm}"
+    echo "Welcome to Bash."  | terminal-notifier -sound dsbgact.aiff
+    bash_welcome="${purple111}Welcome to Bash${norm}"
+    centerStringColor "${bash_welcome}" "18"
+    echo -e "\a"
+}
+bash_login_title() {
+    tput setaf 85; figlet -w $COLUMNS -c Bourne-Again Shell; tput sgr0
+}
+bash_title() {
+    tput setaf 141; printf "%$(tput cols)s\n\n" " " | tr " " "-"; tput sgr0
+    tput setaf 85; figlet -w $COLUMNS -c -f chunky Bash; tput sgr0
+}
+bashRefresh() { 
+    tput clear ; source "$XDG_CONFIG_HOME/bash/bashrc"
+}

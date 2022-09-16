@@ -1,14 +1,16 @@
 #!/bin/zsh
 
-######### Seph's .zprofile. Runs on login.
-##                           __ _ _      
-##      _____ __  _ __ ___  / _(_) | ___ 
-##     |_  / '_ \| '__/ _ \| |_| | |/ _ \
-##    _ / /| |_) | | | (_) |  _| | |  __/
-##   (_)___| .__/|_|  \___/|_| |_|_|\___|
-##         |_|                           
-##
-### -------------------------------------
+# --------- Seph's .zprofile. Runs on login.
+# -----------------------------------------
+#                           __ _ _      
+#      _____ __  _ __ ___  / _(_) | ___ 
+#     |_  / '_ \| '__/ _ \| |_| | |/ _ \
+#    _ / /| |_) | | | (_) |  _| | |  __/
+#   (_)___| .__/|_|  \___/|_| |_|_|\___|
+#         |_|   
+#
+# -----------------------------------------
+# https://zsh.sourceforge.io/Doc/Release/Files.html#Files
 
 ## .zprofile is meant as an alternative to `.zlogin' for ksh fans
 ## the two are not intended to be used together, although this could
@@ -28,9 +30,13 @@
 ## only reason I added XDG vars there, too, is because it’s, in this
 ## case, convenient for reuse.
 ###
-######### • Load shell profile
-if [ -f "$HOME/.config/shell/profile" ]; then
-    source "$HOME/.config/shell/profile" && zshell_profile="shell_profile"
+
+# --------- Load shell profile
+if [ -f "${XDG_CONFIG_HOME}/shell/profile" ]; then
+    source "${XDG_CONFIG_HOME}/shell/profile" &&
+    export confirm_shell_profile="shell_profile"
 fi
-###
-printf "%s - %s" "$zshell_profile" "$zshell_exports"
+if [ -f "${ZDOTDIR}/zsh_functions" ]; then
+    source "${ZDOTDIR}/zsh_functions" &&
+    export confirm_zsh_functions="zsh_functions"
+fi

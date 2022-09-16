@@ -13,6 +13,7 @@ bash_prompt_1() {
     bash_prompt_info=$(centerStringColor "${purple105}\u's ${blue45}BASH ${pink139}v\v ${blue45}:${norm} ${blue153}${BASH}${norm}\n" "57")
     bash_prompt_utility="${purple129}: ${green50}\h ${pink212}{${blue87}\w${pink212}}${norm}\n\n"
     bash_prompt_cursor="${purple75} ⚘ ${norm}"
+    
     PS1="\n${bash_prompt_border}${bash_prompt_info}${bash_prompt_utility}${bash_prompt_cursor}"
 }
 bash_prompt_1

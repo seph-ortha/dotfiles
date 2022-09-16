@@ -12,9 +12,9 @@
 ######### • Info
 alias \
         bookmarks='cat $XDG_CONFIG_HOME/web/bookmarks' \
-        fontbook='ls $FONT_DIR_HOME | less' \
+        fontbook='ls $FONT_DIR_HOME' \
         figlet-fonts='ls /usr/local/Cellar/figlet/2.2.5/share/figlet/fonts | less' \
-        sys-sounds='ls $HOME/Library/Sounds | less' \
+        sys-sounds='ls $HOME/Library/Sounds' \
         show-path='echo $PATH | tr ":" "\n"' \
 ###
 ######### • Navigation
@@ -30,15 +30,14 @@ alias \
 ######### • Programs
 alias \
         doom='open /Applications/GZDoom.app' \
-        mpd='mpd ~/.config/mpd/mpd.conf' \
-        muson='mpd && ncmpcpp' \
-        musoff='killall ncmpcpp && killall mpd' \
+        music_daemon='mpd ~/.config/mpd/mpd.conf' \
+        music_client='ncmpcpp' \
         irssi='irssi --config="$XDG_CONFIG_HOME"/irssi/config --home="$XDG_DATA_HOME"/irssi' \
         ls='lsd' \
         cat='bat' \
         vim='nvim' \
         decalib="$HOME/.local/share/decalib/decalib.sh" \
-        bash="bash --rcfile $XDG_CONFIG_HOME/bash/bashrc"
+        bash="bash --rcfile ${XDG_CONFIG_HOME}/bash/bashrc"
 ######### • Utility
 alias \
         ka='killall' \

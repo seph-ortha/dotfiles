@@ -9,7 +9,6 @@
 ##                 |_|                           
 ## 
 ## ----------------------------------
-if [ "$0" = "bash" ]; then
-    . "$HOME/.config/bash/bash_profile"
-    exit 0
-fi
+
+# --------- Source XDG
+[ -f "${HOME}/.config/shell/xdg" ] && . "${HOME}/.config/shell/xdg"
