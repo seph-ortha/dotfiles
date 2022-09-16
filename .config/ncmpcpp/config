@@ -36,9 +36,9 @@
 
 mpd_music_dir = "/volumes/audio/rec/audio·decalib"
 
-ncmpcpp_directory = ""$XDG_CONFIG_HOME"/ncmpcpp"
+ncmpcpp_directory = "~/.config/ncmpcpp"
 
-lyrics_directory = ""$XDG_CONFIG_HOME"/ncmpcpp/lyrics"
+lyrics_directory = "~/.config/ncmpcpp/lyrics"
 
 #——————————————————————————————————————
 

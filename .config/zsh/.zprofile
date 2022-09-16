@@ -29,8 +29,8 @@
 ## case, convenient for reuse.
 ###
 ######### • Load shell profile
-if [ -f "$XDG_CONFIG_HOME/shell/profile" ]; then
-    source "$XDG_CONFIG_HOME/shell/profile" && zshell_profile="shell_profile"
+if [ -f "$HOME/.config/shell/profile" ]; then
+    source "$HOME/.config/shell/profile" && zshell_profile="shell_profile"
 fi
 ###
 printf "%s - %s" "$zshell_profile" "$zshell_exports"

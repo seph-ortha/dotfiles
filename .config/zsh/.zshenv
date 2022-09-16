@@ -18,9 +18,7 @@
 # sourced for _every_ shell (unless invoked with zsh
 # -f).
 
-######### • Zsh dotfiles outside of $HOME.
-if [ -d "$XDG_CONFIG_HOME/zsh" ]; then
-    ZDOTDIR="$XDG_CONFIG_HOME/zsh"
+# --------- Zsh dotfiles outside of $HOME.
+if [ -d "$HOME/.config/zsh" ]; then
+    ZDOTDIR="$HOME/.config/zsh"
 fi
-###
-. "/Users/seph_ortha/.local/share/cargo/env"
