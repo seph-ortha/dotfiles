@@ -55,6 +55,6 @@ alias \
 #--------- Git
 alias \
         config='/usr/bin/git --git-dir=$HOME/dev/repos/dotfiles/ --work-tree=$HOME' \
-        gpush-config="config push https://github.com/sephortha/dotfiles.git"
+        gpush-config="config push https://github.com/seph-ortha/dotfiles.git"
 ###
 ### -----------------------------------------------------
